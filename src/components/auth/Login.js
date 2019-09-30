@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import Header from '../layout/Header';
+import { validateLogin } from '../utils/Validator';
 import constants from '../../config/constants';
+import AlertModal from '../utils/Alert';
 
 function Login() {
   const user = {
@@ -20,6 +22,8 @@ function Login() {
   const [ loginUser, setLoginUser ] = useState(user);
   const [ viewState, setViewState ] = useState(initialState);
 
+  const closeAlert = () => setViewState(initialState);
+
 
   const submitForm = (e) => {
     e.preventDefault();
@@ -29,6 +33,37 @@ function Login() {
       isLoading: true,
       isSuccess: false
     });
+    const error = validateLogin(loginUser);
+    if(error) {
+      setViewState({
+        errorMessage: error,
+        isError: true,
+        isLoading: false,
+        isSuccess: false
+      });
+    } else {
+      setViewState({
+        errorMessage: '',
+        isError: false,
+        isLoading: false,
+        isSuccess: true
+      });
+    };
+  }
+
+
+  let view = '';
+  let modalView = '';
+  const { isLoading, isError, isSuccess, errorMessage } = viewState;
+  if(isLoading) {
+    view = 'Loading';
+  } else if(!isLoading && isError) {
+    modalView = <AlertModal
+    data={errorMessage}
+    type="danger"
+    method={closeAlert}/>
+  } else if(!isLoading && isSuccess) {
+    view = 'Login Successful'
   }
 
 
@@ -36,6 +71,11 @@ function Login() {
     <div>
       <Header />
       <Container className="content text-center">
+        <Row>
+          <Col>
+            {modalView}
+          </Col>
+        </Row>
         <Row>
           <Col>
             <h3 className="form-head_title">
@@ -64,7 +104,7 @@ function Login() {
               Login
             </Button>
             <Form.Group className="text-danger">
-              view error
+              {view}
             </Form.Group>
             <Form.Group className="form-footer_text">
             <ul className="list-unstyled list-not-found">
