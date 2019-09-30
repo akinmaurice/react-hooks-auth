@@ -2,6 +2,9 @@ import React from 'react';
 import { render } from 'react-dom';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import App from './components/App';
+import Login from './components/auth/Login';
+import Register from './components/auth/Register';
+import NotFound from './components/utils/NotFound';
 import * as serviceWorker from './serviceWorker';
 import './css/style.css';
 
@@ -12,6 +15,9 @@ const Root = () => (
         <div>
           <Switch>
             <Route path="/" exact component={App}/>
+            <Route path="/login" exact component={Login}/>
+            <Route path="/register" exact component={Register}/>
+          <Route component={NotFound} />
           </Switch>
         </div>
       </Router>

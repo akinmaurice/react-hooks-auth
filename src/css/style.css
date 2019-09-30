@@ -55,17 +55,24 @@ font-family: "Panama";
 
 .btn {
   font-family: 'Varela Round';
-  font-size: 13px;
+  font-size: 14px;
+}
+
+
+.btn-login {
+  background-color: #200122;
+  color: #F5F5F5 !important;
+  border: 1px solid #200122;
 }
 
 
 .btn-danger {
   background-color: #F44336;
-  color: #ffffff !important;
+  color: #F5F5F5 !important;
 }
 
 .btn-default {
-  background-color: #FFFFFF;
+  background-color: #F5F5F5;
   color: #000000 !important;
 }
 
@@ -76,32 +83,58 @@ font-family: "Panama";
 
 
 input[type="text"] {
-  font-size: 13px;
+  font-size: 14px;
 }
 
 
 ::-webkit-input-placeholder {
-  font-size: 13px;
+  font-size: 14px;
 }
 
 ::-moz-placeholder {
-  font-size: 13px;
+  font-size: 14px;
 }
 
 
 :-ms-input-placeholder {
-  font-size: 13px;
+  font-size: 14px;
 }
 
 ::placeholder {
-  font-size: 13px;
+  font-size: 14px;
 }
 
 textarea {
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .search-form {
   max-width: 400px;
   margin: 0 auto;
+}
+
+.login-form {
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+  font-size: 14px;
+}
+
+.login-form .form-control:focus {
+  z-index: 2;
+}
+
+.login-form input [type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+  background-color: #F5F5F5;
+}
+
+
+.login-form input [type="password"] {
+  margin-bottom: -1px;
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+  background-color: #F5F5F5;
 }
