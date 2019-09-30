@@ -1,0 +1,107 @@
+@font-face {
+  font-family: 'panama';
+  src: url("./fonts/panama-bold-webfont.woff2") format("woff2"),
+   url("./fonts/panama-bold-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@import url('https://fonts.googleapis.com/css?family=Open+Sans|Varela+Round|Roboto&display=swap');
+
+body {
+  font-family: 'Varela Round';
+  color: #F5F5F5 !important;
+  background: #000000;
+  font-size: 14px;
+}
+
+a {
+  color: #2857bd !important;
+  text-decoration: none;
+}
+
+.navbar{
+  background: linear-gradient(90deg,#200122, #480048);
+}
+
+.jumbotron {
+  background-color: transparent;
+}
+
+.jumbotron  h1{
+  font-family: 'panama';
+}
+
+
+.brand {
+color: #F5F5F5 !important;
+letter-spacing: -1px;
+word-spacing: 0px;
+font-weight: 600;
+font-style: normal;
+font-variant: normal;
+text-transform: none;
+text-decoration: none;
+text-indent: 0px;
+font-family: "Panama";
+}
+
+
+.navbar a {
+  text-decoration: none;
+  color: #F5F5F5 !important;
+}
+
+
+.btn {
+  font-family: 'Varela Round';
+  font-size: 13px;
+}
+
+
+.btn-danger {
+  background-color: #F44336;
+  color: #ffffff !important;
+}
+
+.btn-default {
+  background-color: #FFFFFF;
+  color: #000000 !important;
+}
+
+
+.content {
+  padding-top: 80px;
+}
+
+
+input[type="text"] {
+  font-size: 13px;
+}
+
+
+::-webkit-input-placeholder {
+  font-size: 13px;
+}
+
+::-moz-placeholder {
+  font-size: 13px;
+}
+
+
+:-ms-input-placeholder {
+  font-size: 13px;
+}
+
+::placeholder {
+  font-size: 13px;
+}
+
+textarea {
+  font-size: 12px;
+}
+
+.search-form {
+  max-width: 400px;
+  margin: 0 auto;
+}
