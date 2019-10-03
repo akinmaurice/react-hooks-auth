@@ -73,11 +73,6 @@ function Login() {
       <Container className="content text-center">
         <Row>
           <Col>
-            {modalView}
-          </Col>
-        </Row>
-        <Row>
-          <Col>
             <h3 className="form-head_title">
             {constants.APP_TITLE}
             </h3>
@@ -89,6 +84,9 @@ function Login() {
         <Row>
           <Col>
           <Form className="login-form">
+            <Form.Group className="text-danger">
+              {modalView}
+            </Form.Group>
             <Form.Group>
               <Form.Control type="email" placeholder="Email"
               value={loginUser.email}

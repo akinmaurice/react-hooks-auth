@@ -1,6 +1,8 @@
 import React from 'react';
 import { render } from 'react-dom';
+import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { store } from './store';
 import App from './components/App';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
@@ -11,6 +13,7 @@ import './css/style.css';
 
 
 const Root = () => (
+    <Provider store={store}>
       <Router>
         <div>
           <Switch>
@@ -21,6 +24,7 @@ const Root = () => (
           </Switch>
         </div>
       </Router>
+    </Provider>
   );
 
   render(<Root />, document.getElementById('root'));
