@@ -2,7 +2,7 @@ import {
   IS_ERROR,
   IS_LOADING,
   ERROR_MESSAGE
-} from '../constants/Types';
+} from '../constants/types';
 
 
 export function isError(bool) {
@@ -24,7 +24,7 @@ export function isLoading(bool) {
 export function errorMessage(error) {
   return {
     type: ERROR_MESSAGE,
-    error,
+    errorMessage: error,
   };
 }
 

@@ -7,9 +7,29 @@ import App from './components/App';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
 import NotFound from './components/pages/NotFound';
+import Logout from './components/auth/Logout';
 import * as serviceWorker from './serviceWorker';
 import './css/style.css';
 
+// import authenticated action from  Login action
+import { authenticated } from './actions/login';
+
+
+
+// Import HOC MiddleWares
+import requireAuth from './components/hoc/require_auth';
+import noRequireAuth from './components/hoc/no_require_auth';
+
+
+/*
+ Check if user token exists
+ then dispatch AUTHENTICATED Action
+*/
+const user = localStorage.getItem('token');
+
+if (user) {
+  store.dispatch(authenticated(true));
+}
 
 
 const Root = () => (
@@ -18,9 +38,10 @@ const Root = () => (
         <div>
           <Switch>
             <Route path="/" exact component={App}/>
-            <Route path="/login" exact component={Login}/>
-            <Route path="/register" exact component={Register}/>
-          <Route component={NotFound} />
+            <Route path="/login" exact component={noRequireAuth(Login)}/>
+            <Route path="/register" exact component={noRequireAuth(Register)}/>
+            <Route path="/logout" exact component={requireAuth(Logout)} />
+            <Route component={NotFound} />
           </Switch>
         </div>
       </Router>

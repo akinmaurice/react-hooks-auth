@@ -14,7 +14,7 @@ export function isError(state = false, action) {
   }
 }
 
-export function isLoading(state = true, action) {
+export function isLoading(state = false, action) {
   switch (action.type) {
     case IS_LOADING:
       return action.isLoading;

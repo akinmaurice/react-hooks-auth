@@ -3,7 +3,7 @@ import {
 } from '../constants/types';
 
 
-export function loginSuccess(state = false, action) {
+export function loginSuccess(state = {}, action) {
   switch (action.type) {
     case LOGIN_SUCCESS:
       return action.loginSuccess;
@@ -12,3 +12,12 @@ export function loginSuccess(state = false, action) {
   }
 }
 
+
+export function authenticated(state = false, action) {
+  switch (action.type) {
+    case 'AUTHENTICATED':
+      return action.authenticated;
+    default:
+      return state;
+  }
+}

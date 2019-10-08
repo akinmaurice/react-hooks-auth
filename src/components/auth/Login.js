@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import Header from '../layout/Header';
 import { validateLogin } from '../utils/Validator';
 import constants from '../../config/constants';
-import AlertModal from '../utils/Alert';
+import { loginUser, loginUserError } from '../../actions/login';
 
 function Login() {
   const user = {
@@ -12,57 +13,33 @@ function Login() {
     password: ''
   };
 
-  const initialState = {
-    errorMessage: '',
-    isError: false,
-    isLoading: false,
-    isSuccess: false
-  };
 
-  const [ loginUser, setLoginUser ] = useState(user);
-  const [ viewState, setViewState ] = useState(initialState);
+  const dispatch = useDispatch();
 
-  const closeAlert = () => setViewState(initialState);
+  const [ loginUserData, setLoginUserData ] = useState(user);
+
+  const { isLoading, isError, errorMessage, authenticated } = useSelector(state => state);
+
 
 
   const submitForm = (e) => {
     e.preventDefault();
-    setViewState({
-      errorMessage: '',
-      isError: false,
-      isLoading: true,
-      isSuccess: false
-    });
-    const error = validateLogin(loginUser);
+    const error = validateLogin(loginUserData);
     if(error) {
-      setViewState({
-        errorMessage: error,
-        isError: true,
-        isLoading: false,
-        isSuccess: false
-      });
+      dispatch(loginUserError(error));
     } else {
-      setViewState({
-        errorMessage: '',
-        isError: false,
-        isLoading: false,
-        isSuccess: true
-      });
-    };
+      dispatch(loginUser(loginUserData));
+    }
   }
 
 
   let view = '';
   let modalView = '';
-  const { isLoading, isError, isSuccess, errorMessage } = viewState;
   if(isLoading) {
     view = 'Loading';
   } else if(!isLoading && isError) {
-    modalView = <AlertModal
-    data={errorMessage}
-    type="danger"
-    method={closeAlert}/>
-  } else if(!isLoading && isSuccess) {
+    view = `${errorMessage}`
+  } else if(!isLoading && authenticated ) {
     view = 'Login Successful'
   }
 
@@ -90,12 +67,12 @@ function Login() {
             <Form.Group>
               <Form.Control type="email" placeholder="Email"
               value={loginUser.email}
-              onChange={e => setLoginUser({ ...loginUser, email: e.target.value})} />
+              onChange={e => setLoginUserData({ ...loginUserData, email: e.target.value})} />
             </Form.Group>
             <Form.Group>
               <Form.Control type="password" placeholder="Password"
               value={loginUser.password}
-              onChange={e => setLoginUser({ ...loginUser, password: e.target.value})} />
+              onChange={e => setLoginUserData({ ...loginUserData, password: e.target.value})} />
             </Form.Group>
             <Button type="submit" className="btn btn-block btn-login"
             onClick={e => submitForm(e)}>
