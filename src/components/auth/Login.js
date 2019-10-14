@@ -5,7 +5,8 @@ import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import Header from '../layout/Header';
 import { validateLogin } from '../utils/Validator';
 import constants from '../../config/constants';
-import { loginUser, loginUserError } from '../../actions/login';
+import { loginUser } from '../../actions/login';
+import { showError } from '../../actions/utils';
 
 function Login() {
   const user = {
@@ -26,7 +27,7 @@ function Login() {
     e.preventDefault();
     const error = validateLogin(loginUserData);
     if(error) {
-      dispatch(loginUserError(error));
+      dispatch(showError(error));
     } else {
       dispatch(loginUser(loginUserData));
     }
@@ -34,7 +35,6 @@ function Login() {
 
 
   let view = '';
-  let modalView = '';
   if(isLoading) {
     view = 'Loading';
   } else if(!isLoading && isError) {
@@ -61,9 +61,6 @@ function Login() {
         <Row>
           <Col>
           <Form className="login-form">
-            <Form.Group className="text-danger">
-              {modalView}
-            </Form.Group>
             <Form.Group>
               <Form.Control type="email" placeholder="Email"
               value={loginUser.email}

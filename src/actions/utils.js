@@ -28,3 +28,11 @@ export function errorMessage(error) {
   };
 }
 
+
+export function showError(error) {
+  return async(dispatch) => {
+    dispatch(isLoading(false));
+    dispatch(isError(true));
+    dispatch(errorMessage(error));
+  }
+}

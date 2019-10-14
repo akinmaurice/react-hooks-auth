@@ -1,72 +1,48 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import Header from '../layout/Header';
 import constant from '../../config/constants';
 import { validateRegister } from '../utils/Validator';
-import AlertModal from '../utils/Alert';
+import { registerUser } from '../../actions/register';
+import { showError } from '../../actions/utils';
 
-function Register() {
+function Register(props) {
   const user = {
     email: '',
     password: '',
     confirm_password: ''
   };
 
-  const initialState = {
-    errorMessage: '',
-    isError: false,
-    isLoading: false,
-    isSuccess: false
-  };
 
+  const dispatch = useDispatch();
 
   const [ newUser, setNewUser ] = useState(user);
-  const [ viewState, setViewState ] = useState(initialState);
 
-  const closeAlert = () => setViewState(initialState);
+  const { isLoading, isError, errorMessage, registerSuccess } = useSelector(state => state);
 
 
   const submitForm = (e) => {
     e.preventDefault();
-    setViewState({
-      errorMessage: '',
-      isError: false,
-      isLoading: true,
-      isSuccess: false
-    });
     const error = validateRegister(newUser);
     if(error) {
-      setViewState({
-        errorMessage: error,
-        isError: true,
-        isLoading: false,
-        isSuccess: false
-      });
+      dispatch(showError(error));
     } else {
-      setViewState({
-        errorMessage: '',
-        isError: false,
-        isLoading: false,
-        isSuccess: true
-      });
-    };
+      dispatch(registerUser(newUser));
+    }
   }
 
 
   let view = '';
-  let modalView = '';
-  const { isLoading, isError, isSuccess, errorMessage } = viewState;
   if(isLoading) {
     view = 'Loading';
   } else if(!isLoading && isError) {
-    modalView = <AlertModal
-    data={errorMessage}
-    type="danger"
-    method={closeAlert}/>
-  } else if(!isLoading && isSuccess) {
-    view = 'Registration Successful'
+    view = `${errorMessage}`
+  } else if(!isLoading && registerSuccess ) {
+    props.history.push('/')
   }
+
 
 
 
@@ -88,9 +64,6 @@ function Register() {
         <Row>
           <Col>
           <Form className="login-form">
-            <Form.Group className="text-danger">
-              {modalView}
-            </Form.Group>
             <Form.Group>
               <Form.Control type="email" placeholder="Email"
               value={newUser.email}

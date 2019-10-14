@@ -47,15 +47,6 @@ export function loginUser(arg) {
 }
 
 
-export function loginUserError(error) {
-  return async(dispatch) => {
-    dispatch(isLoading(false));
-    dispatch(isError(true));
-    dispatch(errorMessage(error));
-  }
-}
-
-
 export function logoutUser() {
   localStorage.clear();
   return (dispatch) => {
