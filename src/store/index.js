@@ -7,7 +7,7 @@ import reducers from '../reducers';
 const config = {
   key: 'root',
   storage,
-  // whitelist: ['user'],
+  whitelist: ['loginSuccess'],
 };
 const reducer = persistReducer(config, reducers);
 

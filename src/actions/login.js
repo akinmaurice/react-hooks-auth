@@ -32,9 +32,9 @@ export function loginUser(arg) {
     dispatch(isError(false));
     try {
       const response = await Api.login(arg)
-      const { data } = response;
-      localStorage.setItem('token', data.token);
-      dispatch(loginSuccess(arg));
+      const { data: { token, user } } = response;
+      localStorage.setItem('token',token);
+      dispatch(loginSuccess(user));
       dispatch(authenticated(true));
       dispatch(isError(false));
       dispatch(isLoading(false));

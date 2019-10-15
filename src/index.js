@@ -8,6 +8,7 @@ import Login from './components/auth/Login';
 import Register from './components/auth/Register';
 import NotFound from './components/pages/NotFound';
 import Logout from './components/auth/Logout';
+import Home from './components/Home';
 import * as serviceWorker from './serviceWorker';
 import './css/style.css';
 
@@ -41,6 +42,7 @@ const Root = () => (
             <Route path="/login" exact component={noRequireAuth(Login)}/>
             <Route path="/register" exact component={noRequireAuth(Register)}/>
             <Route path="/logout" exact component={requireAuth(Logout)} />
+            <Route path="/home" exact component={requireAuth(Home)} />
             <Route component={NotFound} />
           </Switch>
         </div>

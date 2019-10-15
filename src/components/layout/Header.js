@@ -21,8 +21,8 @@ const Header = () => {
   if(authenticated) {
     navLink = (
       <Nav className="ml-auto">
-        <Link to ="/" className="nav-link">
-          User Email
+        <Link to ="/home" className="nav-link">
+          Protected
         </Link>
         <Link to ="/logout" className="nav-link">
           Logout

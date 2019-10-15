@@ -24,8 +24,7 @@ export function registerUser(arg) {
     dispatch(isLoading(true));
     dispatch(isError(false));
     try {
-      const response = await Api.register(arg)
-      const { data } = response;
+      await Api.register(arg);
       dispatch(registerSuccess(true));
       dispatch(isError(false));
       dispatch(isLoading(false));

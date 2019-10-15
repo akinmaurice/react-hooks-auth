@@ -1,16 +1,34 @@
+import axios from 'axios';
+import urls from '../constants/url';
+
 export const login = async (arg) => {
-  const response = {
+  const response = await axios.post(urls.login, arg);
+  const{ data }= response;
+  const { status, message, token, userDetails } = data;
+  if(status !== 200) {
+    throw new Error(message);
+  }
+  const result = {
      data :{
-      token: 'randownfufuyf'
+      token,
+      user: userDetails
     }
   }
-  return response;
+  return result;
 }
 
 
 export const register = async (arg) => {
-  const data = {
-    arg
+  const body = {
+    ...arg,
+    name: 'null',
+    passwordConfirm: arg.confirm_password
+  }
+  const response = await axios.post(urls.register, body)
+  const { data } = response;
+  const { status, message } = data;
+  if(status !== 200) {
+    throw new Error(message);
   }
   return data;
 }
