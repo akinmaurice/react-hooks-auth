@@ -1,5 +1,3 @@
-describe('Cypress', () => {
-  it('is working', () => {
-    expect(true).to.equal(true)
-  })
+test('Fake Test', ()=>{
+  expect(true).toBeTruthy();
 })
