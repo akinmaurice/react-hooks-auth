@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
@@ -6,7 +6,7 @@ import Header from '../layout/Header';
 import constant from '../../config/constants';
 import { validateRegister } from '../utils/Validator';
 import { registerUser } from '../../actions/register';
-import { showError } from '../../actions/utils';
+import { showError, clearError } from '../../actions/utils';
 
 function Register(props) {
   const user = {
@@ -32,6 +32,12 @@ function Register(props) {
       dispatch(registerUser(newUser));
     }
   }
+
+
+
+  useEffect(()=> {
+    dispatch(clearError());
+  }, [dispatch])
 
 
   let view = '';

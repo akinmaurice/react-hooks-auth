@@ -36,3 +36,12 @@ export function showError(error) {
     dispatch(errorMessage(error));
   }
 }
+
+
+export function clearError() {
+  return async(dispatch) => {
+    dispatch(isLoading(false));
+    dispatch(isError(false));
+    dispatch(errorMessage(''));
+  }
+}
